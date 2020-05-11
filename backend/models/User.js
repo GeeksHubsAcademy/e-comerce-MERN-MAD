@@ -16,7 +16,22 @@ const userSchema = new mongoose.Schema({
         type: String,
         enum: ['admin', 'customer']
     }
+}, {
+    timestamps: true,
+    toJSON: {
+        transform: (doc, ret) => {
+            delete ret.password;
+            delete ret.tokens;
+            return ret
+        }
+    }
 });
+// userSchema.methods.toJSON =function () {
+//     const user = this.toObject();
+//     delete user.password;
+//     delete user.tokens;
+//     return user;
+// }
 userSchema.pre('save', async function(next) {
     try {
         const user = this;
