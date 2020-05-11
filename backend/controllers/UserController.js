@@ -41,13 +41,19 @@ const UserController = {
             });
         } catch (error) {
             console.error(error)
+            res.status(500).send({ message: 'There was a problem trying to log in' })
         }
     },
     update(req, res) {
 
     },
     delete(req, res) {
-
+        User.findByIdAndDelete(req.params.id)
+            .then(user => res.send(user))
+            .catch(error => {
+                console.error(error);
+                res.status(500).send(error)
+            })
     }
 }
 export default UserController;
