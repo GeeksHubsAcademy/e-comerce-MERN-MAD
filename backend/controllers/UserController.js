@@ -26,14 +26,26 @@ const UserController = {
                 email: req.body.email
             })
             if (!user) {
-                res.status(400).send({ message: 'Wrong credentials' });
+                res.status(400).send({
+                    message: 'Wrong credentials'
+                });
             }
             const isMatch = await bcrypt.compare(req.body.password, user.password);
             if (!isMatch) {
-                res.status(400).send({ message: 'Wrong credentials' });
+                res.status(400).send({
+                    message: 'Wrong credentials'
+                });
             }
-            const token = jwt.sign({ _id: user._id }, keys.jwt_auth_secret, { expiresIn: '2y' });
-            await User.findByIdAndUpdate(user._id, { $push: { tokens: token } });
+            const token = jwt.sign({
+                _id: user._id
+            }, keys.jwt_auth_secret, {
+                expiresIn: '2y'
+            });
+            await User.findByIdAndUpdate(user._id, {
+                $push: {
+                    tokens: token
+                }
+            });
             res.json({
                 user,
                 token,
@@ -41,11 +53,24 @@ const UserController = {
             });
         } catch (error) {
             console.error(error)
-            res.status(500).send({ message: 'There was a problem trying to log in' })
+            res.status(500).send({
+                message: 'There was a problem trying to log in'
+            })
         }
     },
     update(req, res) {
-
+        try {
+            if (req.body.password) {
+                req.body.password = await bcrypt.hash(req.body.password, 9);
+            }
+            User.findByIdAndUpdate(req.params.id, req.body, {
+                    new: true
+                })
+                .then(user => res.send(user))
+        } catch (error) {
+            console.error(error);
+            res.status(500).send(error)
+        }
     },
     delete(req, res) {
         User.findByIdAndDelete(req.params.id)
