@@ -1,16 +1,28 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import './Header.scss';
-const Header = () => {
+import { connect } from 'react-redux'
+const Header = ({ user }) => {
+    const logout = ()=>{
+        
+    }
     return (
         <header className="header">
             <NavLink to='/' exact>Home</NavLink>
-            <div className="guestZone">
-                <NavLink to='/login' exact>Login</NavLink>
-                <NavLink to='/register' exact>Register</NavLink>
-            </div>
+            {user ?
+                <div className="userZone">
+
+                    <NavLink to='/profile' exact>{user.email}</NavLink>
+                    <div onClick={logout}>Logout</div>
+                </div>
+                :
+                <div className="guestZone" >
+                    <NavLink to='/login' exact>Login</NavLink>
+                    <NavLink to='/register' exact>Register</NavLink>
+                </div>
+            }
         </header>
     )
 }
-
-export default Header
+const mapStateToProps = ({ user }) => ({ user: user.user })
+export default connect(mapStateToProps)(Header);
