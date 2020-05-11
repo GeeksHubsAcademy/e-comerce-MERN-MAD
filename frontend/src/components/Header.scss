@@ -1,9 +1,13 @@
 .header {
     display: flex;
     justify-content: space-between;
+    padding: 1rem;
     a {
         all: unset;
         padding: 0.5em;
         cursor: pointer;
+    }
+    .anticon-shopping-cart {
+        font-size: 5rem;
     }
 }

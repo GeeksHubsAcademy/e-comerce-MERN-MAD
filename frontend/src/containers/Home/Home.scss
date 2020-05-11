@@ -1,0 +1,10 @@
+.products {
+    padding: 2em;
+    .product {
+        display: flex;
+        flex-direction: column;
+        img {
+            max-width: 150px;
+        }
+    }
+}
