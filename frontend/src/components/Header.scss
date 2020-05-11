@@ -1,0 +1,9 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    a {
+        all: unset;
+        padding: 0.5em;
+        cursor: pointer;
+    }
+}
