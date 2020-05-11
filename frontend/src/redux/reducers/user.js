@@ -1,7 +1,22 @@
-import { REGISTER } from "../types";
+import {
+    LOGIN,
+    LOGOUT
+} from "../types";
 
-export default (state, action) => {
+const userReducer = (state = {}, action) => {
     switch (action.type) {
-        default: return state
+        case LOGIN:
+            return {
+                ...state,
+                user: action.payload
+            }
+        case LOGOUT:
+            return {
+                ...state,
+                user: undefined
+            }
+        default:
+            return state
     }
 }
+export default userReducer;
