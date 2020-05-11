@@ -58,7 +58,7 @@ const UserController = {
             })
         }
     },
-    update(req, res) {
+    async update(req, res) {
         try {
             if (req.body.password) {
                 req.body.password = await bcrypt.hash(req.body.password, 9);
