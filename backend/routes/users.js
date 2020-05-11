@@ -6,5 +6,6 @@ const { authentication } = authMiddlewares;
 router.get('/', authentication, UserController.getAll);
 router.post('/register', UserController.register);
 router.post('/login', UserController.login);
+router.delete('/:id', UserController.delete);
 
 export default router;
