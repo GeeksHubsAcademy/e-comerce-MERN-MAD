@@ -13,5 +13,9 @@
     },
     "keywords": [],
     "author": "",
-    "license": "ISC"
+    "license": "ISC",
+    "dependencies": {
+        "redux-devtools-extension": "^2.13.8",
+        "redux-localstorage-simple": "^2.2.0"
+    }
 }

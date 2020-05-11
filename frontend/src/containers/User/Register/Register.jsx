@@ -1,9 +1,19 @@
 import React from 'react';
-import { Form, Input, Button, Checkbox } from 'antd';
+import { Form, Input, Button, notification } from 'antd';
 import './Register.scss'
+import { register } from '../../../redux/actions/users';
+import { useHistory } from 'react-router-dom';
 const Register = () => {
-    const onFinish = values => {
-        console.log('Success:', values);
+    const history = useHistory();
+    const onFinish = user => {
+        register(user).then(()=>{
+            notification.success({message:'Usuario registrado',description:'Usuario registrado con éxito'})
+            history.push('/login')
+        })
+        .catch(error=>{
+            console.error(error)
+            notification.error({message:'Error en registro',description:'Error al tratar de registrar al usuario'})
+        })
     };
 
     return (
