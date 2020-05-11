@@ -32,7 +32,7 @@ const ProductController = {
             })
     },
     delete(req, res) {
-        Product.findOneAndDelete(req.params.id)
+        Product.findByIdAndDelete(req.params.id)
             .then(product => res.send(product))
             .catch(error => {
                 console.error(error)
